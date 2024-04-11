@@ -3,11 +3,11 @@ package io.github.danchaves.msfrete.controllers;
 import io.github.danchaves.msfrete.dtos.FreteRequestDto;
 import io.github.danchaves.msfrete.dtos.FreteResponseDto;
 import io.github.danchaves.msfrete.service.FreteService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @RestController
 @RequestMapping("/fretes")
@@ -22,6 +22,12 @@ public class FreteController {
     @PostMapping
     public ResponseEntity<FreteResponseDto> insert(@RequestBody FreteRequestDto requestDto){
         FreteResponseDto responseDto = service.insert(requestDto);
-        return ResponseEntity.ok(responseDto);
+        return ResponseEntity.created(URI.create("/fretes/" + responseDto.getId())).body(responseDto);
+    }
+
+    @GetMapping
+    public ResponseEntity<Page<FreteResponseDto>> findAllPage(@RequestParam int pagina, @RequestParam int itens){
+        Page<FreteResponseDto> pageResponseDto = service.findAll(pagina, itens);
+        return ResponseEntity.ok(pageResponseDto);
     }
 }

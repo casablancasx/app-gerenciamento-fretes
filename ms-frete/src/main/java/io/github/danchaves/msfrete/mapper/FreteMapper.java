@@ -6,6 +6,8 @@ import io.github.danchaves.msfrete.models.Frete;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.factory.Mappers;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 @Mapper
 public interface FreteMapper {
@@ -23,4 +25,9 @@ public interface FreteMapper {
     @Mapping(source = "cliente.telefone" , target = "telefone")
     @Mapping(target = "valorFaltando", ignore = true)
     FreteResponseDto mapEntityToDto(Frete frete);
+
+
+    default Page<FreteResponseDto> mapPageEntityToPageDto(Page<Frete> pageFrete){
+        return pageFrete.map(frete -> mapEntityToDto(frete));
+    }
 }
