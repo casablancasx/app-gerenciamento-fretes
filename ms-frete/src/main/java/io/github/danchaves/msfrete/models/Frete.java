@@ -3,9 +3,17 @@ package io.github.danchaves.msfrete.models;
 import io.github.danchaves.msfrete.enums.MetodoPagamento;
 import io.github.danchaves.msfrete.enums.StatusPagamento;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "tb_frete")
 public class Frete {
@@ -14,20 +22,27 @@ public class Frete {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String destino;
 
+    @Column(nullable = false)
     private LocalDate data;
 
     @Enumerated(EnumType.STRING)
     private MetodoPagamento metodo;
 
-    private Double total;
+    @Column(nullable = false)
+    private Double valorTotal;
 
     private Double pagamentoInicial;
 
+    @Enumerated(EnumType.STRING)
     private StatusPagamento status;
 
     @Column(columnDefinition = "TEXT")
     private String observacao;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "frete_id", nullable = false)
+    private Cliente cliente;
 }
