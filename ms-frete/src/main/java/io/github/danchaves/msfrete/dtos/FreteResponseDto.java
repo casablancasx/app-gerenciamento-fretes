@@ -12,6 +12,8 @@ import java.time.LocalDate;
 @Setter
 public class FreteResponseDto {
 
+    private Long id;
+
     private String nome;
 
     private String telefone;

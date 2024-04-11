@@ -34,7 +34,8 @@ public class Frete {
     @Column(nullable = false)
     private Double valorTotal;
 
-    private Double pagamentoInicial;
+    @Column(nullable = false)
+    private Double valorPago;
 
     @Enumerated(EnumType.STRING)
     private StatusPagamento status;
@@ -42,7 +43,7 @@ public class Frete {
     @Column(columnDefinition = "TEXT")
     private String observacao;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
     @JoinColumn(name = "frete_id", nullable = false)
     private Cliente cliente;
 }
