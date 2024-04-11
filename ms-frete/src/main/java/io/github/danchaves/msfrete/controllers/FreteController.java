@@ -30,4 +30,10 @@ public class FreteController {
         Page<FreteResponseDto> pageResponseDto = service.findAll(pagina, itens);
         return ResponseEntity.ok(pageResponseDto);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        service.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
