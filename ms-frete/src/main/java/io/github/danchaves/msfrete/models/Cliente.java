@@ -21,12 +21,12 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Column(nullable = false)
     private String nome;
-
-    private String sobrenome;
 
     private String email;
 
+    @Column(nullable = false)
     private String telefone;
 
 
