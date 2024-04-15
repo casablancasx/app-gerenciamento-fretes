@@ -34,7 +34,7 @@ public class FreteResponseDto {
 
     private String observacao;
 
-    public void setValorFaltando(){
-        valorFaltando = valorTotal - valorPago;
+    public Double getValorFaltando(){
+        return valorTotal - valorPago;
     }
 }
