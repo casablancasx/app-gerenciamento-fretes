@@ -45,7 +45,7 @@ public class Frete {
     private String observacao;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "frete_id", nullable = false)
+    @JoinColumn(name = "clientegt_id", nullable = false)
     private Cliente cliente;
 
 }
